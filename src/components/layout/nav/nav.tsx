@@ -9,9 +9,7 @@ function Nav() {
                 <div className="container">
                     <Link to="/">
                         <div className="logo">
-                            <NavLink to="/">
-                                <img className="logo-image" src="/BMG-logo.webp" alt="logo" />
-                            </NavLink>
+                            <img className="logo-image" src="/BMG-logo.webp" alt="logo" />
                         </div>
                     </Link>
 
@@ -21,7 +19,11 @@ function Nav() {
                                 <NavLink activeClassName="active" className="menu-link" to="/">
                                     Home
                                 </NavLink>
-
+                            </li>
+                            <li className="menu-item">
+                                <NavLink activeClassName="active" className="menu-link" to="/users">
+                                    Users
+                                </NavLink>
                             </li>
                         </ul>
 

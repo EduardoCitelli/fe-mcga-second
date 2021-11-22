@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Nav from './components/layout/nav/nav';
@@ -13,6 +11,7 @@ function App() {
         <Nav />
         <Switch>
           <Route path="/" component={Main} />
+          <Route path="/users" />
         </Switch>
         <Footer />
       </div>
