@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
+import { bindActionCreators as actionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { User } from "../../../models/user";
 import { AppActions } from "../../../redux/actions/models/actions";
@@ -8,30 +8,29 @@ import { AppState } from "../../../redux/configureStore";
 import { Component } from 'react';
 import HeaderUser from '../headerUser/headerUser';
 import './mainUser.css';
+import ListUsers from '../listUser/listUsers';
 
-interface Props { }
-
-interface LinkStateProps {
+interface StateProps {
     users: User[];
 }
 
-interface LinkDispatchProps {
-    boundRequestUsers: () => void;
+interface DispatchProps {
+    requestUsers: () => void;
 }
 
-type LinkProps = Props & LinkStateProps & LinkDispatchProps;
+type LinkProps = StateProps & DispatchProps;
 
-const mapStateToProps = (state: AppState): LinkStateProps => ({
+const mapStateToProps = (state: AppState): StateProps => ({
     users: state.userReducer.users,
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, {}, AppActions>) => ({
-    boundRequestUsers: bindActionCreators(getUsers, dispatch),
+    requestUsers: actionCreators(getUsers, dispatch),
 });
 
 class MainUser extends Component<LinkProps> {
     componentDidMount() {
-        this.props.boundRequestUsers();
+        this.props.requestUsers();
     }
 
     render() {
@@ -41,25 +40,9 @@ class MainUser extends Component<LinkProps> {
             <>
                 <HeaderUser />
 
-                <div className="grid">
-                    {
-                        users.map((user: User) => (
-                            <div key={user.id} className="card">
-                                <h3>{user.name} - {user.surname}</h3>
-                                <p>Username: {user.username}</p>
-                                <p>Phone: {user.phone}</p>
-                                <p>email: {user.email}</p>
-                                <hr />
-
-
-                            </div>
-                        ))
-                    }
-
-                </div>
-
+                <ListUsers users={users} />
             </>
-        )
+        );
     }
 }
 
