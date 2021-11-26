@@ -51,13 +51,20 @@ function MainUser(props: LinkProps) {
             {
                 props.loading ? (<Spinner />) : (
                     <>
-                        <SimpleModal buttonColor="primary" children={<UserForm addUser={props.saveUsers} />} text="Create User ➕" title="New User" />
-                        <ListUsers users={users} deleteUser={props.deleteUsers} updateUser={props.saveUsers} />
+                        <SimpleModal
+                            buttonColor="primary"
+                            text="Create User ➕"
+                            title="New User"
+                            children={<UserForm addUser={props.saveUsers} />}
+                        />
+                        <ListUsers
+                            users={users}
+                            deleteUser={props.deleteUsers}
+                            updateUser={props.saveUsers}
+                        />
                     </>
                 )
             }
-
-
         </>
     );
 }

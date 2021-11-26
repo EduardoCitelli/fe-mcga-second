@@ -12,7 +12,8 @@ export async function handleResponse(response: Response) {
 
 export function handleError(error: Error) {
     console.error("API call failed. " + error);
-    throw error;
+
+    alert(error);
 }
 
 interface ErrorModel {
