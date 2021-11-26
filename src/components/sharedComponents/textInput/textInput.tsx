@@ -7,13 +7,14 @@ interface Props {
     name: string;
     placeHolder: string;
     type: React.InputHTMLAttributes<unknown>['type'];
+    required: boolean;
 }
 
 function TextInput(props: Props) {
     return (
         <Field
             name={props.name}
-            validate={required}
+            validate={props.required ? required : undefined}
         >
             {({ input, meta }) => (
                 <div className="text-field">

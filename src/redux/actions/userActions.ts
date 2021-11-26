@@ -37,11 +37,13 @@ export function getUser(userId: string) {
 
 export function saveUser(user: User) {
     return function (dispatch: Dispatch<AppActions>): Promise<void> {
+        const id = user.id;
+
         dispatch(beginApiCall());
 
         return userApi.saveUser(user)
             .then(response => {
-                user.id
+                id
                     ? dispatch(updateUserSuccess(response.data))
                     : dispatch(createUserSuccess(response.data));
             })

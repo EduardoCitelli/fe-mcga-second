@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { User } from "../../../models/user";
 import SimpleModal from "../../sharedComponents/modal/modal";
 import UserForm from "../addUser/addUser";
@@ -25,22 +24,31 @@ function ListUsers(prop: Props) {
                         <hr />
 
                         <div className="button-panel">
-                            <SimpleModal 
-                                buttonColor="primary" 
-                                children={<UserForm addUser={prop.updateUser} updaterUser={user} />} 
-                                text="Edit ✍" 
-                                title="Edit User" />
-
-                            <SimpleModal 
-                                buttonColor="error" 
-                                text="Delete 🗑" 
-                                title="Are you sure you want to delete this item? 🚧" 
-                                children={<DeleteUser deleteOnClickHandler={prop.deleteUser} closeOnClickHandler={() => onclose} user={user}/>}/>
+                            <SimpleModal
+                                buttonColor="primary"
+                                text="Edit ✍"
+                                title="Edit User"
+                                children={
+                                    <UserForm
+                                        addUser={prop.updateUser}
+                                        updaterUser={user} />
+                                }
+                            />
+                            <SimpleModal
+                                buttonColor="error"
+                                text="Delete 🗑"
+                                title="Are you sure you want to delete this item? 🚧"
+                                children={
+                                    <DeleteUser
+                                        deleteOnClickHandler={prop.deleteUser}
+                                        closeOnClickHandler={() => onclose}
+                                        idUser={user.id as string} />
+                                }
+                            />
                         </div>
                     </div>
                 ))
             }
-
         </div>
     )
 }

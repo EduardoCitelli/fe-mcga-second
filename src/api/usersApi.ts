@@ -15,8 +15,11 @@ export function getUser(userId: string): Promise<any> {
 }
 
 export function saveUser(user: User): Promise<any> {
-    return fetch(baseUrl + (user.id || ""), {
-        method: user.id ? "PUT" : "POST",
+    const id = user.id;
+    delete user.id;
+
+    return fetch(baseUrl + (id || ""), {
+        method: id ? "PUT" : "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(user)
     })

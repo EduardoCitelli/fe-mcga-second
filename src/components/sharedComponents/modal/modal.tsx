@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Button, ButtonPropsColorOverrides, Modal, Typography } from '@mui/material';
-import { DistributiveOmit, OverridableStringUnion } from '@mui/types';
+import { OverridableStringUnion } from '@mui/types';
 import './modal.css';
 
 interface Prop {
-    children?: JSX.Element;
+    children: JSX.Element;
     text: string;
     title: string;
     buttonColor: OverridableStringUnion<'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning', ButtonPropsColorOverrides>;
@@ -22,11 +22,14 @@ const style = {
 };
 
 export default function SimpleModal(prop: Prop) {
-
     const [open, setOpen] = React.useState(false);
 
-    const handleOpen = () => setOpen(true);    
+    const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const childreWithCallBack = React.cloneElement(prop.children, {
+        cb: handleClose,
+    });
 
     return (
         <div className="modal-container">
@@ -44,7 +47,7 @@ export default function SimpleModal(prop: Prop) {
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         {prop.title}
                     </Typography>
-                    {prop.children}
+                    {childreWithCallBack}
                 </Box>
             </Modal>
         </div>
