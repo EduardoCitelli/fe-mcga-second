@@ -46,7 +46,7 @@ class MainUser extends Component<LinkProps> {
             <>
                 <HeaderUser />
 
-                <SimpleModal children={<UserForm addUser={this.props.saveUsers} />} text="Create User +" />
+                <SimpleModal buttonColor="primary" children={<UserForm addUser={this.props.saveUsers} />} text="Create User +" title="New User" />
 
                 <ListUsers users={users} deleteUser={this.props.deleteUsers} updateUser={this.props.saveUsers}/>
             </>

@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { User } from "../../../models/user";
 import SimpleModal from "../../sharedComponents/modal/modal";
 import UserForm from "../addUser/addUser";
+import DeleteUser from "../deleteUser/deleteUser";
 import './listUsers.css';
 
 interface Props {
@@ -11,13 +12,6 @@ interface Props {
 }
 
 function ListUsers(prop: Props) {
-    function deleteOnClickHandler(id: string): () => Promise<void> {
-        return async () => {
-            if (window.confirm("Are you sure you want to delete this item? 🚧")) {
-                prop.deleteUser(id);
-            }
-        };
-    }
 
     return (
         <div className="grid">
@@ -31,8 +25,17 @@ function ListUsers(prop: Props) {
                         <hr />
 
                         <div className="button-panel">
-                            <SimpleModal children={<UserForm addUser={prop.updateUser} updaterUser={user} />} text="Edit ✍" />
-                            <Button variant="contained" color="error" onClick={deleteOnClickHandler(user.id as string)}>Delete 🗑</Button>
+                            <SimpleModal 
+                                buttonColor="primary" 
+                                children={<UserForm addUser={prop.updateUser} updaterUser={user} />} 
+                                text="Edit ✍" 
+                                title="Edit User" />
+
+                            <SimpleModal 
+                                buttonColor="error" 
+                                text="Delete 🗑" 
+                                title="Are you sure you want to delete this item? 🚧" 
+                                children={<DeleteUser deleteOnClickHandler={prop.deleteUser} closeOnClickHandler={() => onclose} user={user}/>}/>
                         </div>
                     </div>
                 ))

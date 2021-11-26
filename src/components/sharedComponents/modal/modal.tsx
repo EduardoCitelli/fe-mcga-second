@@ -1,10 +1,13 @@
 import React from "react";
-import { Box, Button, Modal } from '@mui/material';
+import { Box, Button, ButtonPropsColorOverrides, Modal, Typography } from '@mui/material';
+import { DistributiveOmit, OverridableStringUnion } from '@mui/types';
 import './modal.css';
 
 interface Prop {
     children?: JSX.Element;
     text: string;
+    title: string;
+    buttonColor: OverridableStringUnion<'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning', ButtonPropsColorOverrides>;
 }
 
 const style = {
@@ -22,14 +25,12 @@ export default function SimpleModal(prop: Prop) {
 
     const [open, setOpen] = React.useState(false);
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => {
-        return setOpen(false);
-    };
+    const handleOpen = () => setOpen(true);    
+    const handleClose = () => setOpen(false);
 
     return (
         <div className="modal-container">
-            <Button variant="contained" color="primary" onClick={handleOpen}>
+            <Button variant="contained" color={prop.buttonColor} onClick={handleOpen}>
                 {prop.text}
             </Button>
 
@@ -40,6 +41,9 @@ export default function SimpleModal(prop: Prop) {
                 onClose={handleClose}
             >
                 <Box className="box-modal" sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        {prop.title}
+                    </Typography>
                     {prop.children}
                 </Box>
             </Modal>
