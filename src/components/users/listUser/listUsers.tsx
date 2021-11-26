@@ -41,7 +41,6 @@ function ListUsers(prop: Props) {
                                 children={
                                     <DeleteUser
                                         deleteOnClickHandler={prop.deleteUser}
-                                        closeOnClickHandler={() => onclose}
                                         idUser={user.id as string} />
                                 }
                             />

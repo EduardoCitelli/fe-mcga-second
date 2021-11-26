@@ -1,7 +1,7 @@
 import * as userApi from "../../api/usersApi";
 import { Dispatch } from "react";
 import { AppActions } from "./models/actions";
-import { apiCallError, beginApiCall } from "./apiStatusActions";
+import { apiCallError, beginApiCall, endApiCall } from "./apiStatusActions";
 import { createUserSuccess, deleteUserSuccess, getUsersSuccess, getUserSuccess, updateUserSuccess } from "./userStatusActions";
 import { User } from "../../models/user";
 
@@ -12,6 +12,7 @@ export function getUsers() {
         return userApi.getUsers()
             .then(response => {
                 dispatch(getUsersSuccess(response.data));
+                dispatch(endApiCall());
             })
             .catch((error: Error) => {
                 dispatch(apiCallError(error.message));
@@ -26,7 +27,8 @@ export function getUser(userId: string) {
 
         return userApi.getUser(userId)
             .then(response => {
-                dispatch(getUserSuccess(response.data))
+                dispatch(getUserSuccess(response.data));
+                dispatch(endApiCall());
             })
             .catch((error: Error) => {
                 dispatch(apiCallError(error.message));
@@ -43,9 +45,8 @@ export function saveUser(user: User) {
 
         return userApi.saveUser(user)
             .then(response => {
-                id
-                    ? dispatch(updateUserSuccess(response.data))
-                    : dispatch(createUserSuccess(response.data));
+                id ? dispatch(updateUserSuccess(response.data)) : dispatch(createUserSuccess(response.data));
+                dispatch(endApiCall());
             })
             .catch((error: Error) => {
                 dispatch(apiCallError(error.message));
@@ -61,6 +62,7 @@ export function deleteUser(userId: string) {
         return userApi.deleteUser(userId)
             .then(response => {
                 dispatch(deleteUserSuccess(response.data));
+                dispatch(endApiCall());
             })
             .catch((error: Error) => {
                 dispatch(apiCallError(error.message));

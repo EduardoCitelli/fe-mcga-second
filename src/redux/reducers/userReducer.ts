@@ -19,7 +19,10 @@ const defaultState: UsersState = {
 export default function userReducer(state = defaultState, action: UserActionType): UsersState | UserState {
     switch (action.type) {
         case ALL_USERS_SUCCESS:
-            return { users: action.users, error: '' }
+            return {
+                ...state,
+                users: action.users
+            }
 
         case GET_USER_SUCCESS:
             return {
@@ -29,22 +32,20 @@ export default function userReducer(state = defaultState, action: UserActionType
 
         case CREATE_USER_SUCCESS:
             return {
+                ...state,
                 users: [...state.users, { ...action.user }],
-                error: ''
             };
 
         case UPDATE_USER_SUCCESS:
             return {
-                users: state.users.map(user =>
-                    user.id === action.user.id ? action.user : user), error: ''
+                ...state,
+                users: state.users.map(user => user.id === action.user.id ? action.user : user),
             };
 
         case DELETE_USER_SUCCESS:
             return {
-                users: state.users.filter(user =>
-                    user.id !== action.user.id
-                ),
-                error: '',
+                ...state,
+                users: state.users.filter(user => user.id !== action.user.id),
             }
 
         default:

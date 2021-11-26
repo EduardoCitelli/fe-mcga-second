@@ -11,9 +11,11 @@ import './mainUser.css';
 import ListUsers from '../listUser/listUsers';
 import UserForm from '../addUser/addUser';
 import SimpleModal from '../../sharedComponents/modal/modal';
+import Spinner from '../../sharedComponents/spinner/spinner';
 
 interface StateProps {
     users: User[];
+    loading: boolean;
 }
 
 interface DispatchProps {
@@ -26,6 +28,7 @@ type LinkProps = StateProps & DispatchProps;
 
 const mapStateToProps = (state: AppState): StateProps => ({
     users: state.userReducer.users,
+    loading: state.apiStatusReducer.loading,
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, {}, AppActions>) => ({
@@ -46,9 +49,16 @@ class MainUser extends Component<LinkProps> {
             <>
                 <HeaderUser />
 
-                <SimpleModal buttonColor="primary" children={<UserForm addUser={this.props.saveUsers} />} text="Create User +" title="New User" />
+                {
+                    this.props.loading ? (<Spinner />) : (
+                        <>
+                            <SimpleModal buttonColor="primary" children={<UserForm addUser={this.props.saveUsers} />} text="Create User ➕" title="New User" />
+                            <ListUsers users={users} deleteUser={this.props.deleteUsers} updateUser={this.props.saveUsers} />
+                        </>
+                    )
+                }
 
-                <ListUsers users={users} deleteUser={this.props.deleteUsers} updateUser={this.props.saveUsers}/>
+
             </>
         );
     }

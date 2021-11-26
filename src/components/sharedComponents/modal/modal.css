@@ -3,6 +3,10 @@
     border: var(--border-menu) !important;
 }
 
+.modal-container {
+    margin: 0.5rem;
+}
+
 .modal-container,
 .box-modal {
     text-align: center;
