@@ -1,0 +1,12 @@
+.text-field {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.error-label {
+    color: red;
+    margin-top: 0.5rem;
+}

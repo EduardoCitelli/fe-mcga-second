@@ -1,8 +1,13 @@
+import { Button } from "@mui/material";
 import { User } from "../../../models/user";
+import SimpleModal from "../../sharedComponents/modal/modal";
+import UserForm from "../addUser/addUser";
+import './listUsers.css';
 
 interface Props {
     users: User[],
     deleteUser: (id: string) => void;
+    updateUser: (user: User) => void;
 }
 
 function ListUsers(prop: Props) {
@@ -25,9 +30,10 @@ function ListUsers(prop: Props) {
                         <p>email: {user.email}</p>
                         <hr />
 
-                        <button onClick={deleteOnClickHandler(user.id as string)}>Delete 🗑</button>
-
-
+                        <div className="button-panel">
+                            <SimpleModal children={<UserForm addUser={prop.updateUser} updaterUser={user} />} text="Edit ✍" />
+                            <Button variant="contained" color="error" onClick={deleteOnClickHandler(user.id as string)}>Delete 🗑</Button>
+                        </div>
                     </div>
                 ))
             }

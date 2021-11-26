@@ -10,7 +10,7 @@ import HeaderUser from '../headerUser/headerUser';
 import './mainUser.css';
 import ListUsers from '../listUser/listUsers';
 import UserForm from '../addUser/addUser';
-import SimpleModal from '../../modal/modal';
+import SimpleModal from '../../sharedComponents/modal/modal';
 
 interface StateProps {
     users: User[];
@@ -46,11 +46,9 @@ class MainUser extends Component<LinkProps> {
             <>
                 <HeaderUser />
 
-                <SimpleModal children={<UserForm addUser={this.props.saveUsers} />} />
+                <SimpleModal children={<UserForm addUser={this.props.saveUsers} />} text="Create User +" />
 
-                <SimpleModal />
-
-                <ListUsers users={users} deleteUser={this.props.deleteUsers} />
+                <ListUsers users={users} deleteUser={this.props.deleteUsers} updateUser={this.props.saveUsers}/>
             </>
         );
     }

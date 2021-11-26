@@ -1,0 +1,9 @@
+.box-modal {
+    background-color: var(--background-color) !important;
+    border: var(--border-menu) !important;
+}
+
+.modal-container,
+.box-modal {
+    text-align: center;
+}
