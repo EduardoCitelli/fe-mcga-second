@@ -3,12 +3,14 @@ import { bindActionCreators as actionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { User } from "../../../models/user";
 import { AppActions } from "../../../redux/actions/models/actions";
-import { getUsers } from "../../../redux/actions/userActions";
+import { deleteUser, getUsers, saveUser } from "../../../redux/actions/userActions";
 import { AppState } from "../../../redux/configureStore";
 import { Component } from 'react';
 import HeaderUser from '../headerUser/headerUser';
 import './mainUser.css';
 import ListUsers from '../listUser/listUsers';
+import UserForm from '../addUser/addUser';
+import SimpleModal from '../../modal/modal';
 
 interface StateProps {
     users: User[];
@@ -16,6 +18,8 @@ interface StateProps {
 
 interface DispatchProps {
     requestUsers: () => void;
+    saveUsers: (user: User) => void;
+    deleteUsers: (id: string) => void;
 }
 
 type LinkProps = StateProps & DispatchProps;
@@ -26,6 +30,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, {}, AppActions>) => ({
     requestUsers: actionCreators(getUsers, dispatch),
+    saveUsers: actionCreators(saveUser, dispatch),
+    deleteUsers: actionCreators(deleteUser, dispatch),
 });
 
 class MainUser extends Component<LinkProps> {
@@ -40,7 +46,11 @@ class MainUser extends Component<LinkProps> {
             <>
                 <HeaderUser />
 
-                <ListUsers users={users} />
+                <SimpleModal children={<UserForm addUser={this.props.saveUsers} />} />
+
+                <SimpleModal />
+
+                <ListUsers users={users} deleteUser={this.props.deleteUsers} />
             </>
         );
     }

@@ -1,12 +1,20 @@
 import { User } from "../../../models/user";
 
 interface Props {
-    users: User[]
+    users: User[],
+    deleteUser: (id: string) => void;
 }
 
 function ListUsers(prop: Props) {
-    return (
+    function deleteOnClickHandler(id: string): () => Promise<void> {
+        return async () => {
+            if (window.confirm("Are you sure you want to delete this item? 🚧")) {
+                prop.deleteUser(id);
+            }
+        };
+    }
 
+    return (
         <div className="grid">
             {
                 prop.users.map((user: User) => (
@@ -16,6 +24,8 @@ function ListUsers(prop: Props) {
                         <p>Phone: {user.phone}</p>
                         <p>email: {user.email}</p>
                         <hr />
+
+                        <button onClick={deleteOnClickHandler(user.id as string)}>Delete 🗑</button>
 
 
                     </div>

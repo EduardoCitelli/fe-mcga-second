@@ -5,13 +5,12 @@ import { AppActions } from './actions/models/actions';
 import apiStatusReducer from './reducers/apiStatusReducer';
 import userReducer from './reducers/userReducer';
 
-
 const logger = createLogger();
 
 export const rootReducer = combineReducers({
     userReducer,
     apiStatusReducer
-})
+});
 
 export type AppState = ReturnType<typeof rootReducer>;
 
