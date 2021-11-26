@@ -14,9 +14,9 @@ export default function DeleteUser(props: Props) {
     }
 
     return (
-        <div className="button-panel">
-            <Button variant="contained" color="error" onClick={() => props.deleteOnClickHandler(props.idUser)}>Yes</Button>
-            <Button variant="contained" color="primary" onClick={closeOnClickHandler}>No</Button>
+        <div className="button-delete-panel">
+            <Button className="button-delete" variant="contained" color="error" onClick={() => props.deleteOnClickHandler(props.idUser)}>Yes</Button>
+            <Button className="button-delete" variant="contained" color="primary" onClick={closeOnClickHandler}>No</Button>
         </div>
     )
 }

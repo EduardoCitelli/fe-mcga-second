@@ -1,3 +1,10 @@
-.button-panel {
+.button-delete-panel {
     margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.button-delete {
+    margin: 0.5rem !important;
 }

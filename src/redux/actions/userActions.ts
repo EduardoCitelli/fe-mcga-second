@@ -37,7 +37,7 @@ export function getUser(userId: string) {
     }
 }
 
-export function saveUser(user: User) {
+export function saveUser(user: User): (dispatch: Dispatch<AppActions>) => Promise<void> {
     return function (dispatch: Dispatch<AppActions>): Promise<void> {
         const id = user.id;
 

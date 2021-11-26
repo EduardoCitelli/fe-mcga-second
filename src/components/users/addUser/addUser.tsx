@@ -23,7 +23,7 @@ const defaultUser: User = {
 export function UserForm(props: Props) {
     const onSubmitUser = (values: User, form: FormApi<User, User>) => {
         props.addUser(values);
-        
+
         form.reset();
 
         if (props.cb)
@@ -39,29 +39,29 @@ export function UserForm(props: Props) {
                 <form
                     className="user-form"
                     onSubmit={handleSubmit}>
-                    <TextInput 
-                        name="name" 
-                        placeHolder="Name" 
+                    <TextInput
+                        name="name"
+                        placeHolder="Name"
                         type="text"
                         required={true} />
-                    <TextInput 
-                        name="surname" 
-                        placeHolder="Surname" 
+                    <TextInput
+                        name="surname"
+                        placeHolder="Surname"
                         type="text"
                         required={true} />
-                    <TextInput 
-                        name="phone" 
-                        placeHolder="Phone" 
+                    <TextInput
+                        name="phone"
+                        placeHolder="Phone"
                         type="tel"
                         required={false} />
-                    <TextInput 
-                        name="email" 
-                        placeHolder="Email" 
+                    <TextInput
+                        name="email"
+                        placeHolder="Email"
                         type="email"
                         required={true} />
-                    <TextInput 
-                        name="username" 
-                        placeHolder="Username" 
+                    <TextInput
+                        name="username"
+                        placeHolder="Username"
                         type="text"
                         required={true} />
                     <div>

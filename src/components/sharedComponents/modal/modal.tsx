@@ -19,6 +19,7 @@ const style = {
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
+    borderRadius: '1rem',
 };
 
 export default function SimpleModal(prop: Prop) {

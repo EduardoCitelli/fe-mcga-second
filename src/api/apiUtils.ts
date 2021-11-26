@@ -2,7 +2,7 @@ export async function handleResponse(response: Response) {
     if (response.ok)
         return response.json();
 
-    if (response.status === 400) {
+    if (response.status >= 400) {
         const error = await response.json() as ErrorModel;
         throw new Error(error.error);
     }
